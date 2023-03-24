@@ -48,6 +48,6 @@ jobs:
           bin: send-mail
           target: ${{ matrix.target }}
           features: ${{ matrix.features || '' }}
-          archive: $bin-${{ matrix.ver }}-$target-${{ matrix.os }}
+          archive: $bin-$target-${{ matrix.os }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
