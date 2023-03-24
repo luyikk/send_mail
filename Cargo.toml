@@ -13,4 +13,4 @@ description = "send email command tool."
 tokio = {version="1",features=["full"]}
 anyhow = "1"
 clap = {version="4",features=["derive"]}
-mail-send = "0.3.2"
+mail-send = "0.3"
