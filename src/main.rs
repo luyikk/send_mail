@@ -33,7 +33,7 @@ async fn main() -> anyhow::Result<()> {
 
     let mut message = MessageBuilder::new();
     let from_str = opt.from.unwrap();
-    println!("FROM:{}",from_str);
+    println!("FROM:{}", from_str);
     if from_str.split(':').count() == 2 {
         let mut from = from_str.split(':');
         message = message.from((from.next().unwrap(), from.next().unwrap()));
@@ -42,7 +42,7 @@ async fn main() -> anyhow::Result<()> {
     }
 
     let to_str = opt.to.unwrap();
-    println!("TO:{}",to_str);
+    println!("TO:{}", to_str);
     let to = to_str
         .split('|')
         .map(|to| {
@@ -55,7 +55,7 @@ async fn main() -> anyhow::Result<()> {
         })
         .collect::<Vec<_>>();
 
-    println!("SUB:{}",opt.subject);
+    println!("SUB:{}", opt.subject);
     message = message.to(to).subject(opt.subject).text_body(opt.body);
 
     if let Some(ref body_html) = opt.body_html {
