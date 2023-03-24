@@ -1,1 +1,5 @@
 /target
+/Cargo.lock
+/.idea/modules.xml
+/.idea/send_mail.iml
+/.idea/vcs.xml
