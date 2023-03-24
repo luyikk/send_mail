@@ -1,0 +1,16 @@
+[package]
+name = "send-mail"
+version = "0.1.0"
+edition = "2021"
+authors = ["luyi <luyikk@126.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/luyikk/send_mail"
+description = "send email command tool."
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = {version="1",features=["full"]}
+anyhow = "1"
+clap = {version="4",features=["derive"]}
+mail-send = "0.3.2"
