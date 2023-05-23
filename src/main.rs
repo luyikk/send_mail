@@ -107,7 +107,7 @@ async fn main() -> anyhow::Result<()> {
 
 #[derive(Parser, Debug)]
 pub struct MailOpt {
-    /// smtp server host
+    /// smtp server host [host] or [host:port]
     #[arg(short, long, value_parser)]
     pub smtp_server: Option<String>,
     /// smtp username
