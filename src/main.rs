@@ -3,6 +3,7 @@ use clap::Parser;
 use mail_send::mail_builder::MessageBuilder;
 use mail_send::SmtpClientBuilder;
 use std::path::PathBuf;
+use std::str::FromStr;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -75,8 +76,22 @@ async fn main() -> anyhow::Result<()> {
     //application/octet-stream
     //message.binary_attachment()
 
-    SmtpClientBuilder::new(opt.smtp_server.context("smtp server is none")?, 25)
+    let (host, port) = {
+        let smtp_server = opt.smtp_server.context("smtp server is none")?;
+        if smtp_server.split(':').count() == 2 {
+            let mut to_sp = smtp_server.split(':');
+            (
+                to_sp.next().unwrap().to_string(),
+                u16::from_str(to_sp.next().unwrap())?,
+            )
+        } else {
+            (smtp_server, 25)
+        }
+    };
+    println!("SMTP SERVER:{host}:{port}");
+    SmtpClientBuilder::new(host, port)
         .implicit_tls(false)
+        .allow_invalid_certs()
         .credentials((
             opt.username.map_or("".to_string(), |x| x),
             opt.password.map_or("".to_string(), |x| x),
